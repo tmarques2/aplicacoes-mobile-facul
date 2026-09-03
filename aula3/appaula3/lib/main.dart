@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart'; // importa a biblioteca que permite a manipulação do banco de dados
 import 'package:path/path.dart'; // Importa a biblioteca que permite pegar o diretorio onde o banco de dados é criado
 
-void main() {
+void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Para garantir que o flutter esteja inicializado antes de acessar o banco de dados
   await _insertInitialDog();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: Home(),
   ));
 }
 
 // Função para inserir os dados no banco de dados
 
-Future<void> _insertInitialDog(Database database, Dog dog) async {
+Future<void> _insertInitialDog() async {
   var database =
       await _initializeDatabase(); // armazena o banco de dados em database
   var Rocky = Dog(id: 1, nome: "Rocky", idade: 4);
