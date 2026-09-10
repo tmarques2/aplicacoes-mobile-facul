@@ -27,9 +27,8 @@ class RestaurantData extends ChangeNotifier {
       final List<dynamic> restaurantData = data['restaurants'];
       _listRestaurant
           .addAll(restaurantData.map((e) => Restaurant.fromMap(e)).toList());
-        final List<dynamic> beverageData = data['beverages'] ?? [];
-        _listBeverages
-          .addAll(beverageData.map((e) => Dish.fromMap(e)).toList());
+      final List<dynamic> beverageData = data['beverages'] ?? [];
+      _listBeverages.addAll(beverageData.map((e) => Dish.fromMap(e)).toList());
       notifyListeners();
     } catch (e) {
       debugPrint('Erro ao carregar restaurants $e');
