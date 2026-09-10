@@ -1,4 +1,5 @@
 import 'package:appaula4/model/dish.dart';
+import 'package:appaula4/data/restaurant_data.dart';
 import 'package:appaula4/ui/_core/app_colors.dart';
 import 'package:appaula4/ui/_core/appbar.dart';
 import 'package:appaula4/ui/widgets/bag_provider.dart';
@@ -10,33 +11,8 @@ class BebidasScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Criando uma lista de bebidas fictícias usando o modelo Dish existente
-    List<Dish> bebidas = [
-      Dish(
-          id: 'bebida-1',
-          imagePath: 'dishes/default.png',
-          name: 'Coca Cola',
-          description: 'Refrigerante 350ml',
-          price: 8),
-      Dish(
-          id: 'bebida-2',
-          imagePath: 'dishes/default.png',
-          name: 'Suco de Laranja',
-          description: 'Suco Natural 500ml',
-          price: 12),
-      Dish(
-          id: 'bebida-3',
-          imagePath: 'dishes/default.png',
-          name: 'Água Mineral',
-          description: 'Água sem gás 500ml',
-          price: 5),
-      Dish(
-          id: 'bebida-4',
-          imagePath: 'dishes/default.png',
-          name: 'Cerveja Artesanal',
-          description: 'Garrafa 600ml',
-          price: 18),
-    ];
+    final restaurantData = context.watch<RestaurantData>();
+    final bebidas = restaurantData.listBeverages;
 
     return Scaffold(
       appBar: getAppBar(context: context, title: 'Bebidas'),

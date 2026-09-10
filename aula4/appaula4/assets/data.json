@@ -246,5 +246,35 @@
                 }
             ]
         }
+    ],
+    "beverages": [
+        {
+            "id": "bebida-1",
+            "imagePath": "dishes/default.png",
+            "name": "Coca Cola",
+            "description": "Refrigerante 350ml",
+            "price": 8
+        },
+        {
+            "id": "bebida-2",
+            "imagePath": "dishes/default.png",
+            "name": "Suco de Laranja",
+            "description": "Suco natural 500ml",
+            "price": 12
+        },
+        {
+            "id": "bebida-3",
+            "imagePath": "dishes/default.png",
+            "name": "Agua Mineral",
+            "description": "Agua sem gas 500ml",
+            "price": 5
+        },
+        {
+            "id": "bebida-4",
+            "imagePath": "dishes/default.png",
+            "name": "Cerveja Artesanal",
+            "description": "Garrafa 600ml",
+            "price": 18
+        }
     ]
 }
