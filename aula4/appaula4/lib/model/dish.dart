@@ -44,4 +44,16 @@ class Dish {
   String toString() {
     return 'Dish(id:$id,name:$name,description:$description,price:$price, imagePath:$imagePath)';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Dish && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode;
+  }
 }
