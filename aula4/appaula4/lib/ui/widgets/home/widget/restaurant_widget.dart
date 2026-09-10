@@ -1,9 +1,11 @@
 // importa as bibliotecas
-/*
+
+import 'package:appaula4/model/restaurant.dart';
+import 'package:appaula4/ui/widgets/restaurant/restaurant_screen.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantWidget extends StatelessWidget {
-  //final Restaurant restaurant;
+  final Restaurant restaurant;
   const RestaurantWidget({super.key, required this.restaurant});
 
   @override
@@ -12,7 +14,7 @@ class RestaurantWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-           // return Restaurantscreen(restaurant: restaurant);
+            return Restaurantscreen(restaurant: restaurant);
           }));
         },
         child: Row(
@@ -46,4 +48,3 @@ class RestaurantWidget extends StatelessWidget {
     );
   }
 }
-*/
