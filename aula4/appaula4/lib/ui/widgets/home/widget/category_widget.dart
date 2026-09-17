@@ -1,5 +1,9 @@
 import 'package:appaula4/ui/_core/app_colors.dart';
-import 'package:appaula4/ui/widgets/bebidas/bebidas_screen.dart';
+import 'package:appaula4/ui/widgets/categorias/bebidas_screen.dart';
+import 'package:appaula4/ui/widgets/categorias/petiscos_screen.dart';
+import 'package:appaula4/ui/widgets/categorias/principais_screen.dart';
+import 'package:appaula4/ui/widgets/categorias/massas_screen.dart';
+import 'package:appaula4/ui/widgets/categorias/sobremesas_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {
@@ -10,11 +14,29 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (category == 'Bebidas') {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const BebidasScreen();
-          }));
+        Widget screen;
+        switch (category) {
+          case 'Bebidas':
+            screen = const BebidasScreen();
+            break;
+          case 'Petiscos':
+            screen = const PetiscosScreen();
+            break;
+          case 'Principais':
+            screen = const PrincipaisScreen();
+            break;
+          case 'Massas':
+            screen = const MassasScreen();
+            break;
+          case 'Sobremesas':
+            screen = const SobremesasScreen();
+            break;
+          default:
+            return;
         }
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return screen;
+        }));
       },
       child: Container(
         width: 100,
