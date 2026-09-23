@@ -311,6 +311,22 @@ class DestinoState extends State<Destino> {
     });
   }
 
+  void diminuirDias() {
+    if (n_diarias == 0) return;
+    setState(() {
+      n_diarias--;
+      total = 0;
+    });
+  }
+
+  void diminuirPessoas() {
+    if (n_pessoas == 0) return;
+    setState(() {
+      n_pessoas--;
+      total = 0;
+    });
+  }
+
   void calctotal() {
     final valorTotal = context.read<CartProvider>().calcularTotal(
           nDiarias: n_diarias,
@@ -394,25 +410,40 @@ class DestinoState extends State<Destino> {
                     ),
                   ),
                   const SizedBox(height: 14),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                  Row(
                     children: [
-                      FilledButton.icon(
-                        onPressed: dias,
-                        icon: const Icon(Icons.add),
-                        label: Text('Diárias: $n_diarias'),
+                      Expanded(
+                        child: _QuantityControl(
+                          label: 'Diárias',
+                          icon: Icons.hotel_outlined,
+                          value: n_diarias,
+                          onDecrease: diminuirDias,
+                          onIncrease: dias,
+                        ),
                       ),
-                      FilledButton.icon(
-                        onPressed: incrementarPessoas,
-                        icon: const Icon(Icons.person_add_alt_1),
-                        label: Text('Acompanhantes: $n_pessoas'),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: _QuantityControl(
+                          label: 'Acompanhantes',
+                          icon: Icons.people_outline,
+                          value: n_pessoas,
+                          onDecrease: diminuirPessoas,
+                          onIncrease: incrementarPessoas,
+                        ),
                       ),
-                      FilledButton.icon(
-                        onPressed: calctotal,
-                        icon: const Icon(Icons.calculate_outlined),
-                        label: const Text('Calcular'),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FilledButton.icon(
+                          onPressed: calctotal,
+                          icon: const Icon(Icons.calculate_outlined),
+                          label: const Text('Calcular'),
+                        ),
                       ),
+                      const SizedBox(width: 10),
                       IconButton.outlined(
                         onPressed: limpar,
                         tooltip: 'Limpar campos',
@@ -452,6 +483,66 @@ class DestinoState extends State<Destino> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _QuantityControl extends StatelessWidget {
+  const _QuantityControl({
+    required this.label,
+    required this.icon,
+    required this.value,
+    required this.onDecrease,
+    required this.onIncrease,
+  });
+
+  final String label;
+  final IconData icon;
+  final int value;
+  final VoidCallback onDecrease;
+  final VoidCallback onIncrease;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 56,
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: onDecrease,
+            tooltip: 'Diminuir $label',
+            color: AppColors.onPrimary,
+            icon: const Icon(Icons.remove),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: AppColors.onPrimary, size: 16),
+                Text(
+                  '$label: $value',
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: AppColors.onPrimary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: onIncrease,
+            tooltip: 'Aumentar $label',
+            color: AppColors.onPrimary,
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
