@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hospedagem/ui/widget/login/login_screen.dart';
+import 'package:hospedagem/ui/_core/app_colors.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.white,
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: AppColors.background,
+        primaryColor: AppColors.primary,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          onPrimary: AppColors.onPrimary,
+          surface: AppColors.surface,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue, foregroundColor: Colors.white))),
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.onPrimary))),
     home: Login(),
   ));
 }
