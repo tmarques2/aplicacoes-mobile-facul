@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hospedagem/data/cart_provider.dart';
-import 'package:hospedagem/ui/widget/login/login_screen.dart';
+import 'package:hospedagem/ui/widget/splash/splash_screen.dart';
 import 'package:hospedagem/ui/_core/app_colors.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => CartProvider(),
@@ -26,7 +28,7 @@ void main() {
             ),
           ),
         ),
-        home: Login(),
+        home: const SplashScreen(),
       ),
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; // biblioteca de design do Flutter
 import 'package:hospedagem/ui/_core/app_colors.dart';
+import 'package:hospedagem/data/session_storage.dart';
 import 'package:hospedagem/ui/widget/cadastro/cadastro_screen.dart';
 import 'package:hospedagem/ui/widget/home/home_screen.dart';
 import 'package:http/http.dart'
@@ -55,10 +56,15 @@ class _LoginState extends State<Login> {
     if (encuser == true) {
       print("Usuario ${user.text} encontrado");
       encuser = false;
+      await SessionStorage.saveLogin();
       // Vai para outra tela
 
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      if (!mounted) return;
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        (route) => false,
+      );
       user.text = "";
       senha.text = "";
     } else {
