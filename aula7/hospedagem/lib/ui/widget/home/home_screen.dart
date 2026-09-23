@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hospedagem/data/cart_provider.dart';
 import 'package:hospedagem/data/session_storage.dart';
+import 'package:hospedagem/model/destination.dart';
 import 'package:hospedagem/ui/widget/login/login_screen.dart';
 import 'package:hospedagem/ui/_core/app_colors.dart';
 import 'package:hospedagem/ui/widget/checkout/checkout_screen.dart';
@@ -63,76 +64,62 @@ class HomeScreen extends Home {
   const HomeScreen({super.key});
 }
 
-class _Destination {
-  const _Destination({
-    required this.name,
-    required this.image,
-    required this.dailyRate,
-    required this.guestRate,
-  });
-
-  final String name;
-  final String image;
-  final int dailyRate;
-  final int guestRate;
-}
-
 const _destinations = [
-  _Destination(
+  Destination(
     name: 'Angra dos Reis',
     image: 'assets/angra.jpg',
     dailyRate: 384,
     guestRate: 70,
   ),
-  _Destination(
+  Destination(
     name: 'Jericoacoara',
     image: 'assets/jericoacoara.jpg',
     dailyRate: 571,
     guestRate: 75,
   ),
-  _Destination(
+  Destination(
     name: 'Arraial do Cabo',
     image: 'assets/arraial.jpg',
     dailyRate: 534,
     guestRate: 65,
   ),
-  _Destination(
+  Destination(
     name: 'Florianópolis',
     image: 'assets/floripa.jpg',
     dailyRate: 348,
     guestRate: 85,
   ),
-  _Destination(
+  Destination(
     name: 'Madri',
     image: 'assets/madri.jpg',
     dailyRate: 401,
     guestRate: 85,
   ),
-  _Destination(
+  Destination(
     name: 'Paris',
     image: 'assets/paris.jpg',
     dailyRate: 546,
     guestRate: 95,
   ),
-  _Destination(
+  Destination(
     name: 'Orlando',
     image: 'assets/orlando.jpg',
     dailyRate: 616,
     guestRate: 105,
   ),
-  _Destination(
+  Destination(
     name: 'Las Vegas',
     image: 'assets/lasvegas.jpg',
     dailyRate: 504,
     guestRate: 110,
   ),
-  _Destination(
+  Destination(
     name: 'Roma',
     image: 'assets/roma.jpg',
     dailyRate: 478,
     guestRate: 85,
   ),
-  _Destination(
+  Destination(
     name: 'Chile',
     image: 'assets/chile.jpg',
     dailyRate: 446,
@@ -157,7 +144,7 @@ class _DestinationCarouselState extends State<_DestinationCarousel> {
     super.dispose();
   }
 
-  void _openDetails(_Destination destination) {
+  void _openDetails(Destination destination) {
     Navigator.push(
       context,
       MaterialPageRoute(
