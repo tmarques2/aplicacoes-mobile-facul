@@ -95,11 +95,15 @@ class DestinoState extends State<Destino> {
           children: [
             Hero(
               tag: widget.caminhoImagem,
-              child: Image.asset(
-                widget.caminhoImagem,
-                height: 260,
+              child: Container(
                 width: double.infinity,
-                fit: BoxFit.cover,
+                constraints: const BoxConstraints(maxWidth: 393),
+                height: 250,
+                color: AppColors.surface,
+                child: Image.asset(
+                  widget.caminhoImagem,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(
