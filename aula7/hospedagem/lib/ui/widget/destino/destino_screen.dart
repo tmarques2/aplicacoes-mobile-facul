@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hospedagem/data/cart_provider.dart';
+import 'package:hospedagem/model/destination.dart';
 import 'package:hospedagem/ui/_core/app_colors.dart';
 import 'package:hospedagem/ui/widget/checkout/checkout_screen.dart';
 import 'package:provider/provider.dart';
@@ -61,12 +62,16 @@ class DestinoState extends State<Destino> {
 
   void calctotal() {
     final valorTotal = context.read<CartProvider>().calcularTotal(
+          destination: Destination(
+            name: widget.nomeDestino,
+            image: widget.caminhoImagem,
+            dailyRate: widget.valord,
+            guestRate: widget.valorp,
+          ),
           nDiarias: n_diarias,
           valorDiaria: widget.valord,
           nPessoas: n_pessoas,
           valorPessoa: widget.valorp,
-          nomeDestino: widget.nomeDestino,
-          caminhoImagem: widget.caminhoImagem,
         );
     setState(() => total = valorTotal);
   }

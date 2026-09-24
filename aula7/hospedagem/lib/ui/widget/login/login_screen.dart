@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart'; // biblioteca de design do Flutter
 import 'package:hospedagem/ui/_core/app_colors.dart';
 import 'package:hospedagem/data/session_storage.dart';
+import 'package:hospedagem/model/user.dart';
 import 'package:hospedagem/ui/widget/cadastro/cadastro_screen.dart';
 import 'package:hospedagem/ui/widget/home/home_screen.dart';
 import 'package:http/http.dart'
@@ -55,20 +56,15 @@ class _LoginState extends State<Login> {
 
     // Cria uma variavel para armazenar os dados
 
-    var dados = json.decode(resposta.body)
-        as List; // armazena os dados na forma de lista
-    if (dados.isNotEmpty) {
-      print("${dados[0]["user"]} ${dados[0]["email"]} ${dados[0]["senha"]}");
-    }
+    final dadosJson = json.decode(resposta.body) as List;
+    final usuarios = dadosJson
+        .map((item) => User.fromJson(item as Map<String, dynamic>))
+        .toList();
 
     // cria laço de repetição para exibir mais de um usuario cadastrado na api
-    for (int i = 0; i < dados.length; i++) {
-      print(
-          "${dados[i]["user"]} | ${dados[i]["email"]} | ${dados[i]["senha"]}");
-
-      if ((user.text == dados[i]["user"] || user.text == dados[i]["email"]) &&
-          senha.text == dados[i]["senha"]) {
-        // variavel encuser muda para true
+    for (final usuario in usuarios) {
+      if ((user.text == usuario.username || user.text == usuario.email) &&
+          senha.text == usuario.password) {
         encuser = true;
       }
     }

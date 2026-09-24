@@ -17,6 +17,12 @@
       "user": "gui da rocha",
       "email": "gui@email.com",
       "senha": "123"
+    },
+    {
+      "id": "e8KZOkInYDg",
+      "user": "Eduardo",
+      "email": "eduardo@gmail.com",
+      "senha": "123456"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
