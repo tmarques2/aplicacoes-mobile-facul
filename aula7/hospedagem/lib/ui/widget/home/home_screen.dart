@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hospedagem/data/cart_provider.dart';
 import 'package:hospedagem/data/session_storage.dart';
@@ -137,10 +139,31 @@ class _DestinationCarousel extends StatefulWidget {
 
 class _DestinationCarouselState extends State<_DestinationCarousel> {
   final PageController _pageController = PageController(viewportFraction: 0.88);
+  Timer? _autoAdvanceTimer;
   int _currentPage = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _autoAdvanceTimer = Timer.periodic(
+      const Duration(seconds: 4),
+      (_) => _showNextDestination(),
+    );
+  }
+
+  void _showNextDestination() {
+    if (!_pageController.hasClients) return;
+    final nextPage = (_currentPage + 1) % _destinations.length;
+    _pageController.animateToPage(
+      nextPage,
+      duration: const Duration(milliseconds: 650),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
   void dispose() {
+    _autoAdvanceTimer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
