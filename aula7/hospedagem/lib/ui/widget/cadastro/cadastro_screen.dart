@@ -52,13 +52,18 @@ class _CadastrousuarioState extends State<Cadastrousuario> {
 
     // Criando a requisição post para cadastrar o usuario
     try {
-      await http.post(
+      final resposta = await http.post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(mensagem),
       );
+      if (resposta.statusCode < 200 || resposta.statusCode >= 300) {
+        if (mounted) setState(() => _carregando = false);
+        _mostrarMensagem('A API não aceitou o cadastro.');
+        return;
+      }
     } catch (_) {
       if (mounted) setState(() => _carregando = false);
       _mostrarMensagem('Não foi possível concluir o cadastro.');

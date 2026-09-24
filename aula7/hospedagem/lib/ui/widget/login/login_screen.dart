@@ -52,9 +52,11 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    print(resposta.statusCode);
-
-    // Cria uma variavel para armazenar os dados
+    if (resposta.statusCode != 200) {
+      if (mounted) setState(() => _carregando = false);
+      _mostrarMensagem('A API retornou um erro ao buscar os usuários.');
+      return;
+    }
 
     final dadosJson = json.decode(resposta.body) as List;
     final usuarios = dadosJson
