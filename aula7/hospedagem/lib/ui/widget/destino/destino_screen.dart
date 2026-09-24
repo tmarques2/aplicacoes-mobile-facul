@@ -82,6 +82,8 @@ class DestinoState extends State<Destino> {
 
   @override
   Widget build(BuildContext context) {
+    final pixTotal = (total * 0.9).round();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.nomeDestino),
@@ -189,12 +191,52 @@ class DestinoState extends State<Destino> {
                   ),
                   if (total > 0) ...[
                     const SizedBox(height: 14),
-                    Text(
-                      'Total da viagem: ${_formatCurrency(total)}',
-                      style: const TextStyle(
-                        color: AppColors.primaryDark,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: AppColors.border),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Total da viagem',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _formatCurrency(total),
+                            style: const TextStyle(
+                              color: AppColors.primaryDark,
+                              fontSize: 19,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.pix,
+                                color: AppColors.primary,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'No Pix (10% de desconto): '
+                                  '${_formatCurrency(pixTotal)}',
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 12),
